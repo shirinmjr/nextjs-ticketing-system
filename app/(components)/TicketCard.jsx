@@ -15,9 +15,19 @@ const TicketCard = () => {
             </div>
             <h4>Ticket Title</h4>
             <hr className='h-px border-0 bg-page mb-2' />
-            <p className='whitespace-3-wrap'>This is the ticket description! Please do this ticket</p>
-            <ProgressDisplay />
-            <StatusDisplay />
+            <p className='whitespace-pre-wrap'>
+                This is the ticket description! Please do this ticket
+            </p>
+            <div className='flex-grow'></div>
+            <div className='flex mt-2'>
+                <div className='flex flex-col'>
+                    <p className='text-xs my-1'>08/31/2023 10:43PM</p>
+                    <ProgressDisplay />
+                </div>
+                <div className="ml-auto  flex items-end">
+                    <StatusDisplay />
+                </div>
+            </div>
         </div>
     );
 };
