@@ -18,8 +18,7 @@
 - [Getting Started](#getting_started)
 - [Tools](#tools)
 - [Under The Hood](#function)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
+- [TODO](#todo)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -153,7 +152,9 @@ Homepage or Dashboard displays all the tickets based on unique categories
     />
     ))}
 ```
+
 ## (models) holds the Schema for Ticket Database
+
 ```JS
 import mongoose, { Schema } from "mongoose";
 
@@ -186,6 +187,15 @@ All API Calls are happening in `/api` directory in `route.js`.
 
 To run CRUD for each Ticket we can create a dynamic route under api folder.
 ex:`api/Tickets/[id]`
+
+## TODOs <a name = "todo"></a>
+
+1- Add Authentication
+
+2- replace `fetch` with axios to call the back-end
+
+3- move all links and credentials to the local .env instead of hardcoding them
+
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@shirinmjr](https://github.com/shirinmjr) - Built this as an experimental project
