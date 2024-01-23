@@ -2,21 +2,27 @@ import TicketCard from "./(components)/TicketCard";
 import Ticket from "@/app/(models)/Ticket";
 import { NextResponse } from "next/server";
 
-
-const getTickets = async () => {
+/** Note To self
+ * Making a call from homepage is not recommended
+ * API calls should be isolated in a separate file under api/
+ * Since we are building static pages for this there are 2 solutions 
+ * 1- Run the api on a different server and make call to that end point at the build time
+ * 2- Make call to Database on load (Not a very good option but in this case works)
+ */
+const getAllTicketsOnLoad = async () => {
   console.log("GET all Ticket");
   try {
     const tickets = await Ticket.find();
     console.log("All Tickets Info: ", tickets);
-    return NextResponse.json({ tickets }, { status: 200 });
+    return { tickets };
   } catch (error) {
-    return NextResponse.json({ message: "Error", error }, { status: 500 });
+    return ({ message: "Error", error });
   }
 };
 
 const Dashboard = async () => {
-  const { tickets } = await getTickets();
-
+  const { tickets } = await getAllTicketsOnLoad();
+  console.log("getting all the tickets on load", tickets);
   const uniqueCategories = [
     ...new Set(tickets?.map(({ category }) => category)),
   ];
@@ -50,13 +56,16 @@ const Dashboard = async () => {
 
 export default Dashboard;
 
-// const getTickets = async () => {
-//   try {
-//     const res = await fetch(`${process.env.API_URL}/api/Tickets`, {
-//       cache: "no-store"
-//     });
-//     return res.json();
-//   } catch (error) {
-//     console.log("Failed to get tickets", error);
-//   }
-// };
+/*
+//Correct approach to make call to the back-end but since we are building static pages this cannot happen at the build time
+    const getTickets = async () => {
+      try {
+        const res = await fetch(`${process.env.API_URL}/api/Tickets`, {
+          cache: "no-store"
+        });
+        return res.json();
+      } catch (error) {
+        console.log("Failed to get tickets", error);
+      }
+    };
+*/
