@@ -10,9 +10,9 @@ import { NextResponse } from "next/server";
  * 2- Make call to Database on load (Not a very good option but in this case works)
  */
 const getAllTicketsOnLoad = async () => {
-  console.log("GET all Ticket");
   try {
     const tickets = await Ticket.find();
+    //const tickets = res.json();
     console.log("All Tickets Info: ", tickets);
     return { tickets };
   } catch (error) {
@@ -22,7 +22,7 @@ const getAllTicketsOnLoad = async () => {
 
 const Dashboard = async () => {
   const { tickets } = await getAllTicketsOnLoad();
-  console.log("getting all the tickets on load", tickets);
+  //console.log("getting all the tickets on load", tickets);
   const uniqueCategories = [
     ...new Set(tickets?.map(({ category }) => category)),
   ];
@@ -35,17 +35,16 @@ const Dashboard = async () => {
             <div className="mb-4" key={categoryIndex}>
               <h2 className="text-orange-400">{uniqueCategory}</h2>
               <div className="lg:grid grid-cols-2 xl:grid-cols-4">
-
                 {tickets
                   .filter((ticket) => ticket.category === uniqueCategory)
                   .map((filteredTicket, _index) => (
-                    <TicketCard
+                    < TicketCard
                       id={_index}
                       key={_index}
                       ticket={filteredTicket}
                     />
-                  ))}
-
+                  )
+                  )}
               </div>
             </div>
           ))}
@@ -60,7 +59,7 @@ export default Dashboard;
 //Correct approach to make call to the back-end but since we are building static pages this cannot happen at the build time
     const getTickets = async () => {
       try {
-        const res = await fetch(`${process.env.API_URL}/api/Tickets`, {
+        const res = await fetch(`${process.env.REACT_APP_API}/api/Tickets`, {
           cache: "no-store"
         });
         return res.json();
