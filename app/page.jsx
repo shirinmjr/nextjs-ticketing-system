@@ -2,7 +2,7 @@ import TicketCard from "./(components)/TicketCard";
 
 const getTickets = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Tickets", {
+    const res = await fetch(`${process.env.API_URL}/api/Tickets`, {
       cache: "no-store"
     });
     return res.json();
