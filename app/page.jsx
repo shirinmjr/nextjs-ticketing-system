@@ -1,17 +1,18 @@
 import TicketCard from "./(components)/TicketCard";
+import Ticket from "@/app/(models)/Ticket";
+import { NextResponse } from "next/server";
+
 
 const getTickets = async () => {
+  console.log("GET all Ticket");
   try {
-    const res = await fetch(`${process.env.API_URL}/api/Tickets`, {
-      cache: "no-store"
-    });
-    return res.json();
+    const tickets = await Ticket.find();
+    console.log("All Tickets Info: ", tickets);
+    return NextResponse.json({ tickets }, { status: 200 });
   } catch (error) {
-    console.log("Failed to get tickets", error);
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
   }
 };
-
-
 
 const Dashboard = async () => {
   const { tickets } = await getTickets();
@@ -48,3 +49,14 @@ const Dashboard = async () => {
 };
 
 export default Dashboard;
+
+// const getTickets = async () => {
+//   try {
+//     const res = await fetch(`${process.env.API_URL}/api/Tickets`, {
+//       cache: "no-store"
+//     });
+//     return res.json();
+//   } catch (error) {
+//     console.log("Failed to get tickets", error);
+//   }
+// };
