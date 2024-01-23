@@ -7,9 +7,8 @@ import React from 'react';
 
 const DeleteBlock = ({ id }) => {
     const router = useRouter();
-
     const deleteTicket = async () => {
-        const res = await fetch(`${process.env.API_URL}/api/Tickets/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/Tickets/${id}`, {
             method: "DELETE"
         });
         if (res.ok) {

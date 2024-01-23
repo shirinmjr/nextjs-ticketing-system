@@ -5,8 +5,8 @@ import ProgressDisplay from './ProgressDisplay';
 import StatusDisplay from './StatusDisplay';
 import Link from 'next/link';
 
-const TicketCard = ({ticket}) => {
-
+const TicketCard = ({ ticket }) => {
+    //console.log("ticket in ticket card:===>", ticket);
     const formatTimestamp = (timestamp) => {
         const options = {
             year: "numeric",
@@ -27,7 +27,7 @@ const TicketCard = ({ticket}) => {
             <div className="flex mb-3">
                 <PriorityDisplay priority={ticket.priority} />
                 <div className='ml-auto'>
-                    <DeleteBlock id={ticket._id} />
+                    <DeleteBlock id={`${ticket._id}`} />
                 </div>
             </div>
             <Link href={`/TicketPage/${ticket._id}`} style={{ display: "contents" }}>
